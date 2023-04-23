@@ -17,20 +17,27 @@ establish the question
 establish what dataset we are doing
 
 #### Analysis####
-ACRU, ACSA, ACPE, AMSP,BEAL,BELE,BEPA,FAGR,FRAM,NYSY,PRSE,QUAL,QURU,QUVE
+Data visualization
 ```{r}
 pheno <- read.csv(file="hf003-08-fall-mean-spp.csv") #read in the data
-pheno %>% #pipe in data
+pheno_trimmed <- pheno %>% #pipe in data
   #filter in species present for the whole dataset
   filter(species=="ACRU"|species=="ACSA"|species=="ACPE"|species=="AMSP"|
            species=="BEAL"|species=="BELE"|species=="BEPA"|species=="FAGR"|
            species=="FRAM"|species=="NYSY"|species=="PRSE"|species=="QUAL"|
-           species=="QURU"|species=="QUVE") %>% 
+           species=="QURU"|species=="QUVE")
+pheno_trimmed %>% 
   ggplot(aes(x = year, y = lc_doy)) + #set year as x axis and julian day of change as the y
   geom_point(aes(color=species, fill=species), size=2) + 
   ggtitle("Leaf Color Change Date Over Time")+ #add title
   xlab("Year") + #label x axis
   ylab("Date 50% of Leaves Changed Color ") + #label y axis
   theme_classic() #changing background
+```
+ANCOVA
+```{r}
+model_1 <- lm(lc_doy~species*year,data=pheno_trimmed)
+summary(model_1)
+aov(lc_doy~species*year,data=pheno_trimmed)
 ```
 
