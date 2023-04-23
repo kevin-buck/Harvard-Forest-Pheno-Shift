@@ -1,0 +1,36 @@
+---
+title: "Leaf Color Change Date in Harvard Forest"
+author: "Kevin Buck, Kyle Elliott, Sydney Higgins"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+```
+
+####Introduction####
+mini Literature review of phenological shift trends
+establish the question
+establish what dataset we are doing
+
+#### Analysis####
+ACRU, ACSA, ACPE, AMSP,BEAL,BELE,BEPA,FAGR,FRAM,NYSY,PRSE,QUAL,QURU,QUVE
+```{r}
+pheno <- read.csv(file="hf003-08-fall-mean-spp.csv") #read in the data
+pheno %>% #pipe in data
+  #filter in species present for the whole dataset
+  filter(species=="ACRU"|species=="ACSA"|species=="ACPE"|species=="AMSP"|
+           species=="BEAL"|species=="BELE"|species=="BEPA"|species=="FAGR"|
+           species=="FRAM"|species=="NYSY"|species=="PRSE"|species=="QUAL"|
+           species=="QURU"|species=="QUVE") %>% 
+  ggplot(aes(x = year, y = lc_doy)) + #set year as x axis and julian day of change as the y
+  geom_point(aes(color=species, fill=species), size=2) + 
+  ggtitle("Leaf Color Change Date Over Time")+ #add title
+  xlab("Year") + #label x axis
+  ylab("Date 50% of Leaves Changed Color ") + #label y axis
+  theme_classic() #changing background
+```
+
