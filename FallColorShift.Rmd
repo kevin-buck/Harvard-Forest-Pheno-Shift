@@ -7,8 +7,19 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
+#plotting
 library(ggplot2)
+# data manipulation
+library(tidyverse)
+# making residual plots
+library(ggResidpanel)
+# estimating marginal means
+library(emmeans)
+# needed for creating proper ANOVA table
+library(car)
+#Anova stat package
+library(rstatix)
+library(ggpubr)
 ```
 
 ####Introduction####
@@ -36,8 +47,12 @@ pheno_trimmed %>%
 ```
 ANCOVA
 ```{r}
-model_1 <- lm(lc_doy~species*year,data=pheno_trimmed)
-summary(model_1)
-aov(lc_doy~species*year,data=pheno_trimmed)
+options(contrasts = c("contr.sum","contr.ply")) #options fo later post hoc comparison
+model_1 <- lm(lc_doy ~ year * species,data=pheno_trimmed) #build linear model
+summary(model_1) #view linear model
+resid_panel(model_1,plot="all") #check on residuals
+Anova(model_1, type = 3) #run an ANCOVA
+pwc <- pheno_trimmed %>% tukey_hsd(lc_doy ~ species) #pair wise comparisons
+pwc #look at the PWC of species
 ```
 
