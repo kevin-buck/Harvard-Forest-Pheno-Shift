@@ -76,7 +76,8 @@ What do graphs show
 Anova
 
 ###Conclusion###
-Conclusion from anova
+Based on the analysis, we can conclude leaf turn date is more climate dependent than species-dependent, but species-dependent is still significant. We also see the interaction between species and year is significant, which means different species aren't responding in the same way to climate changes as years go on. This is not what we hypothesized, but makes intuitive sense, as different trees respond differently to changing seasons. Further testing will help clarify what effect species differences affect the leaf drop date, and help us understand which species are more or less affected by climate change from year to year. One of the further tests we can do is compare different genera and different species within genera to see if the leaf change date is more dependent on species or genus.
+
 
 ###Contribution Statement###
 We extend our appreciation to everyone who made this project possible, specifically Mr. O'Keefe and his team at Harvard that collected the data that we were able to use as well as Dr. McLachlan and his team of TAs (specifically Gretchen and Eva) that helped to advise and educate us on biostatistics. This project would not have been possible without your work as well, so we thank you for making this opportunity for our group!
