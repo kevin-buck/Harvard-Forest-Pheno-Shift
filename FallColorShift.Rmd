@@ -23,17 +23,21 @@ library(ggpubr)
 ```
 
 ####Introduction####
-Researcher John O'Keefe and his team starting in 1991 collected various statistics for a number of species of trees in the Prospect Hill Tract Harvard Forest in Petersham, MA. He has continued to record the statistics and compile them in an online data archive in order to provide researchers with data to investigate if certain trends are correlated with certain species. 
-In this data archive, one particular data set has statistics regarding the mean day of the year in which each tree of various given species has 50% of their leaves change color. We will be investigating how this day (listed in Meridian days within the data set) is correlated with species type and investigate the trends for each species throughout the last 30 years. 
+Researcher John O'Keefe and his team starting in 1991 collected various statistics for a number of species of trees in the Prospect Hill Tract Harvard Forest in Petersham, MA. He has continued to record the statistics and compile them in an online data archive in order to provide researchers with data to investigate if certain trends are correlated with certain species. In this data archive, one particular data set has statistics regarding the mean day of the year in which each tree of various given species has 50% of their leaves change color. We will be investigating how this day (listed in Julian days within the data set) is correlated with species type and investigate the trends for each species throughout the last 30 years. 
 
+Our initial hypothesis is that this would be the defining factor because the trees are different species. Still, because of climate change, we expect warmer temperatures to last longer. This impacts the leaf color-changing process, which we predict will have a net result of later Julian days for the 50% quota to be reached by each species. Leaf color change affects nutrient cycling, so understanding the relationship between climate change and leaves changing color in different species is crucial for predicting if the long-term effects of climate change or different species are the dominant factor when leaves change. If climate change is the defining factor, we would see a time-dependent differentiating change from year to year. In contrast, if species were the defining factor, we would see an asymmetric time-dependent differentiating change that isn't dependent on the year-to-year as it would be on each species.
+###Hypotheses###
+Null: There is no species or year effect on leaf color change date. It will be random with noise
+HA1: The leaf color change date would increase each year with no species dependence.
+HA2: The leaf color change date would be different for each species, but not change from year to year.
+HA3:The leaf color change date would be later as years progress, with each species' leaf color change date being different as well.
 ###Data Acquisition###
 O'Keefe and his team's data was collected through weekly observations of percent leaf coloration and percent leaf fall started in September each year. Researchers observed when 50% of the leaves of trees of different species had changed color and started to fall, and recorded those dates. They recorded this data for 33 unique types of species from 1991 to the present day, with the most recent data coming from 2022.
 
 ####Analysis####
-Upon piping our desired data set, we filtered down to the 14 species that had recorded mean meridian dates for 50% of the leaves changing colors for each of the tree species. To assess the changes in the meridian date of leaf color change in each species per year, we first created a scatter plot of the meridian date vs. year and had each species of tree which were represented by the different colors. 
+Upon piping our desired data set, we filtered down to the 14 species that had recorded mean Julian dates for 50% of the leaves changing colors for each of the tree species. To assess the changes in the Julian date of leaf color change in each species per year, we first created a scatter plot of the Julian date vs. year and had each species of tree which were represented by the different colors. We added trend lines for each species to better visualize the overall trend for each species.
 
-how did we choose to analyze the data with our given question
-Data visualization
+To further investigate species and their overall trend in 50% leaf color changes as a mean Julian day, we created another graph in which we grouped the species within the same genus to see if trees of a more similar genetic background have similar leaf color changing effects. This graph will be able to help us determine if there is a specific impact seen by the species type and if the trends are correlated within each genus of tree or if they are specific to each species.
 
 ```{r}
 pheno <- read.csv(file="hf003-08-fall-mean-spp.csv") #read in the data
@@ -64,13 +68,7 @@ Anova(model_1, type = 3) #run an ANCOVA
 pwc <- pheno_trimmed %>% tukey_hsd(lc_doy ~ species) #pair wise comparisons
 pwc #look at the PWC of species
 
-#pwc %>% 
-  #ggplot(aes(x = species, y = lc_doy)) + #set year as x axis and julian day of change as the y
-  #geom_bar(aes(color=species, fill=species), size=2) + 
-  #ggtitle("Leaf Color Change Date Over Time")+ #add title
-  #xlab("Species") + #label x axis
-  #ylab("Date 50% of Leaves Changed Color ") + #label y axis
-  #theme_classic() #changing background
+
 ```
 
 ###Results###
@@ -81,7 +79,7 @@ Anova
 Conclusion from anova
 
 ###Contribution Statement###
-We extend our appreciation to everyone who made this project possible, specifically Mr. O'Keefe and his team at Harvard that collected the data that we were able to use as well as Dr. McLachlan and his team of TAs that helped to advise and educate us on biostatistics. This project would not have been possible without your work as well, so we thank you for making this opportunity for our group!
+We extend our appreciation to everyone who made this project possible, specifically Mr. O'Keefe and his team at Harvard that collected the data that we were able to use as well as Dr. McLachlan and his team of TAs (specifically Gretchen and Eva) that helped to advise and educate us on biostatistics. This project would not have been possible without your work as well, so we thank you for making this opportunity for our group!
 
 ###Citations###
 O'Keefe J. 2023. Phenology of Woody Species at Harvard Forest since 1990. Harvard Forest Data Archive: HF003 (v.35). Environmental Data Initiative: https://doi.org/10.6073/pasta/eb0dd36c6ec62a918340b6bda38be832.
