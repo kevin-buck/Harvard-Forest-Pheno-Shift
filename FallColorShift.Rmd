@@ -30,7 +30,7 @@ Current literature agrees that there is likely a trend of later fall coloring wi
 **Methods**
 
 *Data Acquisition*/
-O'Keefe and his team's data was collected through weekly observations of percent leaf coloration and percent leaf fall started in September each year. Researchers observed when 50% of the leaves of trees of different species had changed color and started to fall, and recorded those dates. They recorded this data for 33 unique types of species from 1991 to the present day, with the most recent data coming from 2022.
+O'Keefe and his team's data was collected through weekly observations of percent leaf coloration and percent leaf fall started in September each year. Researchers observed when 50% of the leaves of trees of different species had changed color and started to fall, and recorded those dates. They recorded this data for 33 unique types of species from 1991 to the present day, with the most recent data coming from 2022. By 2001, O'Keefe and his team had seen that of the 33 species they had been recording, only 14 had shown a statistically significant variety in average Julian day of leaf drop. Because of this, from 2002 onward they decided to only record data and inquire further with those 14 species, which are the 14 that we are focusing on in this project.
 
 *Analysis*/
 From our desired data set, we filtered down to the 14 species that had recorded mean Julian dates for 50% of the leaves changing colors for every year from 1991 until present. To assess the variation in date of leaf color change in each species per year, we first created a scatter plot of the Julian date vs. year and had each species of tree which were represented by the different colors. We added trend lines for each species to better make a preliminary visualization the overall trend for each species. We also made a graph of residuals, and confirmed the data fit the assumptions of linear models (linear, independence, equal variance and normally distributed residuals).
@@ -68,7 +68,7 @@ pwc <- pheno_trimmed %>% tukey_hsd(lc_doy ~ species) #pair wise comparisons
 ```
 
 **Results**\
-Extremely low p-values for comparisons between different species, different years, and the interaction between the two show year, species, and the year-species interaction show that all of these factors have an important effect on variation in leaf change date (p<.0001 for all). However, the F-value for year that is 10 times larger (F=37.9) than that for species (F=3.8) and the year:species interaction (F-3.9) show that year is the dominating contributor to the trend in leaf color change date shift (which itself has R^2=.69 and p<.0001). Pairwise comparisons reveal varying levels of similarity between species in how much and in what direction then influence the date shift trend.
+Extremely low p-values for comparisons between different species, different years, and the interaction between the two show year, species, and the year-species interaction show that all of these factors have an important effect on variation in leaf change date (p<.0001 for all). However, the F-value for year that is 10 times larger (F=37.9) than that for species (F=3.8) and the year:species interaction (F-3.9) show that year is the dominating contributor to the trend in leaf color change date shift (which itself has R^2=.69 and p<.0001). Pairwise comparisons reveal varying levels of similarity between species in how much and in what direction then influence the date shift trend. One of the further tests we can do is compare different genera and different species within genera to see if the leaf change date is more dependent on species or genus.
 
 **Conclusion**\
 Based on the analysis, we can conclude leaf turn date is more climate dependent than species-dependent, but species-dependent is still significant. We also see the interaction between species and year is significant, which means different species aren't responding in the same way to climate changes as years go on. This is not what we hypothesized, but makes intuitive sense, as different tree species respond differently to changing climate. Further testing will help clarify what effect species differences affect the leaf drop date, and help us understand which species are more or less affected by climate change from year to year. One of the further tests we can do is compare different genera and different species within genera to see if the leaf change date is more dependent on species or genus. Another further test we could do is adding back in the species with partial data sets and only looking at the data as far as we can use all species, assessing the differences between all species.
@@ -85,7 +85,9 @@ O'Keefe J. 2023. Phenology of Woody Species at Harvard Forest since 1990. Harvar
 **Supplementary Information**\
 Linear Model Results and Coefficients
 ```{r out.width = "50%"}  
-summary(model_1)
+#out put is super long, so we commented out, but uncomment and run this line 
+#to see coefficients
+#summary(model_1)
 ```
 Pairwise Comparisons
 ```{r out.width = "50%"}
